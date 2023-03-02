@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "base/header.html" %}
+
+    <title>Welcome {{ request.session.email }}</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/assessment#about">About</a>
+            <a href="/assessment">Assessment</a>
+            <a href="/assessment#contact">Contact</a>
+            <div id="indicator"></div>
+        </nav>
+    </header>
+
+    <div id="quiz">
+        <div class="logout">
+            <a href="/logout">
+                <button>Logout</button>
+            </a>
+        </div>
+
+        <h1 id="quiz-name"></h1>
+        <button id="submit-button">Submit Answers</button>
+        <button id="next-question-button">Next Question</button>
+        <button id="prev-question-button">Previous</button>
+
+        <div id="quiz-results">
+            <p id="quiz-results-message"></p>
+            <p id="quiz-results-score"></p>
+            <button id="quiz-retry-button">Retry</button>
+        </div>
+    </div>
+
+    {% block script %}
+    <script>
+        // Array of all the questions and choices to populate the questions. This might be saved in some JSON file or a database and we would have to read the data in.
+
+        var all_questions = [
+            // {% for q in quiz %}
+            // {
+            //     question_string: {{ q.question }},
+            //     choices: {
+            //         correct: {{ q.correct }},
+            //         wrong: ["Pink", "Orange", "Green"]
+            //     }
+            // },
+            // {% endfor %}
+            {
+                question_string: "What color is the sky?",
+                choices: {
+                    correct: "Blue",
+                    wrong: ["Pink", "Orange", "Green"]
+                }
+            },
+            {
+                question_string: "Which of the following elements aren’t introduced in HTML5?",
+                choices: {
+                    correct: "<input>",
+                    wrong: ["<article>", "<footer>", "<hgroup>"]
+                }
+            },
+            {
+                question_string: "How many wheels are there on a tricycle?",
+                choices: {
+                    correct: "Three",
+                    wrong: ["One", "Two", "Four"]
+                }
+            },
+            {
+                question_string: 'Who is the main character of Harry Potter?',
+                choices: {
+                    correct: "Harry Potter",
+                    wrong: ["Hermione Granger", "Ron Weasley", "Voldemort"]
+                }
+            },
+        ];
+    </script>
+    {% endblock %}
+
+    {% include "base/footer.html" %}
+</body>
+
+</html>
